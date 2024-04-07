@@ -43,7 +43,7 @@ def unordered_list_to_html_node(block):
     for line in split_block:
         if line == '':
             continue
-        children = text_to_children(line.lstrip('*- '))
+        children = text_to_children(line[2:])
         list_items.append(ParentNode('li', children))
     return ParentNode('ul', list_items)
 
@@ -54,7 +54,7 @@ def ordered_list_to_html_node(block):
     for line in split_block:
         if line == '':
             continue
-        children = text_to_children(line.lstrip('1234567890. '))
+        children = text_to_children(line[3:])
         list_items.append(ParentNode('li', children))
     return ParentNode('ol', list_items)
 
