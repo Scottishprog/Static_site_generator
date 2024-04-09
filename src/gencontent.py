@@ -28,3 +28,15 @@ def generate_page(from_path, template_path, dest_path):
         os.makedirs(dest_dirname)
     with open(dest_path, 'w') as write_file:
         write_file.write(template_value)
+
+
+def gen_content_recursive(from_path, template_path, dest_path):
+    for path in os.listdir(from_path):
+        if os.path.isfile(from_path):
+            generate_page(os.path.join(from_path, path),
+                          template_path,
+                          os.path.join(dest_path))
+        if os.path.isdir(path):
+            gen_content_recursive(os.path.join(from_path, path),
+                                  template_path,
+                                  os.path.join(dest_path, path))
